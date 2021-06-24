@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>counter</title>
+    <style>
+        @font-face {
+            font-family: pixel;
+            src: url("Minecraftia-Regular.ttf");
+        }
+        html, body {
+            margin: 0;
+            width: 100%;
+            height: 100%;
+        }
+        body {
+            background-image: url('retro-bg.jpg');
+            animation: bg 10s linear alternate infinite;
+            transition: font-size 0.2s ease;
+            font-family: pixel;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #counter {
+            color: white;
+            font-size: 20vh;
+            text-align: center;
+        }
+        @keyframes bg {
+            0% {
+                background-position: left;
+            }
+            100% {
+                background-position: right;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1 id="counter"></h1>
+    <script>
+        let counter = document.getElementById("counter");
+        let count = localStorage.getItem('count');
+        let n = count ? count : 0;
+        setInterval(() => {
+            n++;
+            counter.style.fontSize = `${500 / counter.toString().length} vmin`
+            counter.textContent = n;
+        }, 10);
+        window.addEventListener("beforeunload", () => {
+            localStorage.setItem("count", n);
+        });
+    </script>
+</body>
+</html>
